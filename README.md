@@ -1,6 +1,6 @@
 # Los Angeles Crime Data Analysis
 
-This project processes and analyzes crime data for Los Angeles from 2010 to 2023. It combines datasets, performs data cleaning, and prepares the data for spatial analysis.
+This project processes and analyzes crime data for Los Angeles from 2010 to 2023. It combines datasets, performs data cleaning, prepares the data for spatial analysis, and generates summary statistics and visualizations.
 
 ## Table of Contents
 
@@ -10,6 +10,7 @@ This project processes and analyzes crime data for Los Angeles from 2010 to 2023
 - [Installation](#installation)
 - [Usage](#usage)
 - [Data Processing](#data-processing)
+- [Data Analysis](#data-analysis)
 - [Output](#output)
 
 ## Prerequisites
@@ -60,20 +61,26 @@ To obtain the necessary data for this analysis, follow these steps:
 
 2. Install the required packages:
    ```bash
-   pip install pandas geopandas shapely
+   pip install pandas geopandas shapely matplotlib
    ```
 
 ## Usage
 
-Ensure your virtual environment is activated, then run the script:
+Ensure your virtual environment is activated, then run the scripts:
 
-```bash
-python process_crime_data.py
-```
+1. Process the raw data:
+   ```bash
+   python process_crime_data.py
+   ```
+
+2. Generate summary statistics and visualizations:
+   ```bash
+   python analyze_crime_data.py
+   ```
 
 ## Data Processing
 
-The script performs the following operations:
+The `process_crime_data.py` script performs the following operations:
 
 1. Loads crime data from 2010 to 2023 from two CSV files.
 2. Concatenates the datasets into a single DataFrame.
@@ -92,10 +99,30 @@ df = df[df['DATE OCC'].dt.year <= 2023]
 
 Replace `2023` with the desired year up to which you want to include data. Make sure to adjust this filter according to the latest available data in your downloaded datasets.
 
+## Data Analysis
+
+The `analyze_crime_data.py` script performs the following operations:
+
+1. Loads the processed GeoPackage file.
+2. Creates a summary table with yearly statistics including:
+   - Total Offenses
+   - Part I Offenses
+   - Part II Offenses
+   - Adult Arrests
+   - Juvenile Arrests
+3. Saves the summary table as an HTML file.
+4. Generates two time series plots:
+   - Total Offenses vs Adult Arrests vs Juvenile Arrests
+   - Total Offenses vs Part I Offenses vs Part II Offenses
+
 ## Output
 
-The script generates a processed GeoPackage file:
+The scripts generate the following outputs:
 
-- `processed_crime_data_2010_2023.gpkg`: Contains the cleaned and processed crime data with spatial information.
+1. `processed_crime_data_2010_2023.gpkg`: A GeoPackage file containing the cleaned and processed crime data with spatial information.
+2. `crime_summary_table.html`: An HTML file with a summary table of yearly crime statistics.
+3. Two time series plots displayed during script execution:
+   - Total Offenses, Adult Arrests, and Juvenile Arrests (2010-2023)
+   - Total Offenses, Part I Offenses, and Part II Offenses (2010-2023)
 
-This file can be used for further analysis, visualization, or integration with GIS software.
+These outputs can be used for further analysis, visualization, or integration with GIS software.
