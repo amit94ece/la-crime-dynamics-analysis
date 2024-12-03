@@ -1,3 +1,5 @@
+Certainly! I'll update the README.md to include information about creating and using a Python virtual environment, as well as using git clone and pip install within that environment. Here's the revised version:
+
 # Los Angeles Crime Data Analysis
 
 This project processes and analyzes crime data for Los Angeles from 2010 to 2023. It combines datasets, performs data cleaning, and prepares the data for spatial analysis.
@@ -5,6 +7,7 @@ This project processes and analyzes crime data for Los Angeles from 2010 to 2023
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
+- [Setting Up the Environment](#setting-up-the-environment)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Data Processing](#data-processing)
@@ -13,13 +16,28 @@ This project processes and analyzes crime data for Los Angeles from 2010 to 2023
 ## Prerequisites
 
 - Python 3.x
-- pandas
-- geopandas
-- shapely
+- git
+
+## Setting Up the Environment
+
+1. Create a Python virtual environment:
+   ```bash
+   python3 -m venv la_crime_env
+   ```
+
+2. Activate the virtual environment:
+   - On Windows:
+     ```bash
+     la_crime_env\Scripts\activate
+     ```
+   - On macOS and Linux:
+     ```bash
+     source la_crime_env/bin/activate
+     ```
 
 ## Installation
 
-1. Clone this repository:
+1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/la-crime-analysis.git
    cd la-crime-analysis
@@ -32,7 +50,7 @@ This project processes and analyzes crime data for Los Angeles from 2010 to 2023
 
 ## Usage
 
-Run the script using Python:
+Ensure your virtual environment is activated, then run the script:
 
 ```bash
 python process_crime_data.py
