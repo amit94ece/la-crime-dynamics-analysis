@@ -61,7 +61,7 @@ To obtain the necessary data for this analysis, follow these steps:
 
 2. Install the required packages:
    ```bash
-   pip install pandas geopandas shapely matplotlib
+   pip install pandas geopandas shapely matplotlib seaborn
    ```
 
 ## Usage
@@ -70,17 +70,27 @@ Ensure your virtual environment is activated, then run the scripts:
 
 1. Process the raw data:
    ```bash
-   python process_crime_data.py
+   python process-crime-data.py
    ```
 
 2. Generate summary statistics and visualizations:
    ```bash
-   python analyze_crime_data.py
+   python analyze-crime-data-summary.py
+   ```
+
+3. Analyze crime data by hour:
+   ```bash
+   python analyze-by-hour.py
+   ```
+
+4. Analyze crime data by day of the week:
+   ```bash
+   python analyze-by-dayofweek.py
    ```
 
 ## Data Processing
 
-The `process_crime_data.py` script performs the following operations:
+The `process-crime-data.py` script performs the following operations:
 
 1. Loads crime data from 2010 to 2023 from two CSV files.
 2. Concatenates the datasets into a single DataFrame.
@@ -101,7 +111,9 @@ Replace `2023` with the desired year up to which you want to include data. Make 
 
 ## Data Analysis
 
-The `analyze_crime_data.py` script performs the following operations:
+### Summary Analysis
+
+The `analyze-crime-data-summary.py` script performs the following operations:
 
 1. Loads the processed GeoPackage file.
 2. Creates a summary table with yearly statistics including:
@@ -115,14 +127,35 @@ The `analyze_crime_data.py` script performs the following operations:
    - Total Offenses vs Adult Arrests vs Juvenile Arrests
    - Total Offenses vs Part I Offenses vs Part II Offenses
 
+### Hourly Analysis
+
+The `analyze-by-hour.py` script performs the following operations:
+
+1. Loads the processed GeoPackage file.
+2. Analyzes crime data by hour of the day.
+3. Generates two plots:
+   - Total Offenses vs Part I and Part II Offenses by Hour
+   - Total Offenses vs Adult and Juvenile Arrests by Hour
+
+### Day of Week Analysis
+
+The `analyze-by-dayofweek.py` script performs the following operations:
+
+1. Loads the processed GeoPackage file.
+2. Analyzes crime data by day of the week.
+3. Generates two plots:
+   - Total Offenses vs Part I and Part II Offenses by Day of the Week
+   - Total Offenses vs Adult and Juvenile Arrests by Day of the Week
+
 ## Output
 
 The scripts generate the following outputs:
 
 1. `processed_crime_data_2010_2023.gpkg`: A GeoPackage file containing the cleaned and processed crime data with spatial information.
 2. `crime_summary_table.html`: An HTML file with a summary table of yearly crime statistics.
-3. Two time series plots displayed during script execution:
-   - Total Offenses, Adult Arrests, and Juvenile Arrests (2010-2023)
-   - Total Offenses, Part I Offenses, and Part II Offenses (2010-2023)
+3. Multiple plots displayed during script execution:
+   - Yearly time series plots
+   - Hourly analysis plots
+   - Day of the week analysis plots
 
 These outputs can be used for further analysis, visualization, or integration with GIS software.
