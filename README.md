@@ -1,5 +1,3 @@
-Certainly! I'll update the README.md to include information about creating and using a Python virtual environment, as well as using git clone and pip install within that environment. Here's the revised version:
-
 # Los Angeles Crime Data Analysis
 
 This project processes and analyzes crime data for Los Angeles from 2010 to 2023. It combines datasets, performs data cleaning, and prepares the data for spatial analysis.
@@ -7,6 +5,7 @@ This project processes and analyzes crime data for Los Angeles from 2010 to 2023
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
+- [Data Acquisition](#data-acquisition)
 - [Setting Up the Environment](#setting-up-the-environment)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -17,6 +16,22 @@ This project processes and analyzes crime data for Los Angeles from 2010 to 2023
 
 - Python 3.x
 - git
+
+## Data Acquisition
+
+To obtain the necessary data for this analysis, follow these steps:
+
+1. Download the 2010-2019 dataset:
+   - Visit https://data.lacity.org/Public-Safety/Crime-Data-from-2010-to-2019/63jg-8b9z/about_data
+   - Click on the "Export" button
+   - Choose "CSV" format
+   - Save the file as `Crime_Data_from_2010_to_2019_20241123.csv` in the `data` folder of your project
+
+2. Download the 2020-present dataset:
+   - Visit https://data.lacity.org/Public-Safety/Crime-Data-from-2020-to-Present/2nrs-mtv8
+   - Click on the "Export" button
+   - Choose "CSV" format
+   - Save the file as `Crime_Data_from_2020_to_Present_20241028.csv` in the `data` folder of your project
 
 ## Setting Up the Environment
 
@@ -68,6 +83,14 @@ The script performs the following operations:
 6. Generates geometric points for spatial analysis using latitude and longitude.
 7. Handles missing values by dropping rows with NaN in specific columns.
 8. Saves the processed data as a GeoPackage file.
+
+**Note**: The preprocessing code currently filters out data beyond 2023. If you want to include data up to a different year, modify the following line in the `process_crime_data.py` script:
+
+```python
+df = df[df['DATE OCC'].dt.year <= 2023]
+```
+
+Replace `2023` with the desired year up to which you want to include data. Make sure to adjust this filter according to the latest available data in your downloaded datasets.
 
 ## Output
 
