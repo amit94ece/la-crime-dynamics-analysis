@@ -1,6 +1,6 @@
 # Los Angeles Crime Data Analysis
 
-This project processes and analyzes crime data for Los Angeles from 2010 to 2023. It combines datasets, performs data cleaning, prepares the data for spatial analysis, and generates summary statistics and visualizations.
+This project processes and analyzes crime data for Los Angeles from 2010 to 2023. It combines datasets, performs data cleaning, prepares the data for spatial analysis, generates summary statistics and visualizations, and includes a machine learning model to predict Part I offenses.
 
 ## Table of Contents
 
@@ -11,6 +11,7 @@ This project processes and analyzes crime data for Los Angeles from 2010 to 2023
 - [Usage](#usage)
 - [Data Processing](#data-processing)
 - [Data Analysis](#data-analysis)
+- [Machine Learning Model](#machine-learning-model)
 - [Output](#output)
 
 ## Prerequisites
@@ -61,7 +62,7 @@ To obtain the necessary data for this analysis, follow these steps:
 
 2. Install the required packages:
    ```bash
-   pip install pandas geopandas shapely matplotlib seaborn
+   pip install pandas geopandas shapely matplotlib seaborn scikit-learn imbalanced-learn
    ```
 
 ## Usage
@@ -88,6 +89,11 @@ Ensure your virtual environment is activated, then run the scripts:
    python analyze-by-dayofweek.py
    ```
 
+5. Run the machine learning model:
+   ```bash
+   python gradient-boost-part-I.py
+   ```
+
 ## Data Processing
 
 The `process-crime-data.py` script performs the following operations:
@@ -101,61 +107,44 @@ The `process-crime-data.py` script performs the following operations:
 7. Handles missing values by dropping rows with NaN in specific columns.
 8. Saves the processed data as a GeoPackage file.
 
-**Note**: The preprocessing code currently filters out data beyond 2023. If you want to include data up to a different year, modify the following line in the `process_crime_data.py` script:
-
-```python
-df = df[df['DATE OCC'].dt.year <= 2023]
-```
-
-Replace `2023` with the desired year up to which you want to include data. Make sure to adjust this filter according to the latest available data in your downloaded datasets.
-
 ## Data Analysis
 
 ### Summary Analysis
 
-The `analyze-crime-data-summary.py` script performs the following operations:
-
-1. Loads the processed GeoPackage file.
-2. Creates a summary table with yearly statistics including:
-   - Total Offenses
-   - Part I Offenses
-   - Part II Offenses
-   - Adult Arrests
-   - Juvenile Arrests
-3. Saves the summary table as an HTML file.
-4. Generates two time series plots:
-   - Total Offenses vs Adult Arrests vs Juvenile Arrests
-   - Total Offenses vs Part I Offenses vs Part II Offenses
+The `analyze-crime-data-summary.py` script creates a summary table with yearly statistics and generates time series plots.
 
 ### Hourly Analysis
 
-The `analyze-by-hour.py` script performs the following operations:
-
-1. Loads the processed GeoPackage file.
-2. Analyzes crime data by hour of the day.
-3. Generates two plots:
-   - Total Offenses vs Part I and Part II Offenses by Hour
-   - Total Offenses vs Adult and Juvenile Arrests by Hour
+The `analyze-by-hour.py` script analyzes crime data by hour of the day and generates related plots.
 
 ### Day of Week Analysis
 
-The `analyze-by-dayofweek.py` script performs the following operations:
+The `analyze-by-dayofweek.py` script analyzes crime data by day of the week and generates related plots.
 
-1. Loads the processed GeoPackage file.
-2. Analyzes crime data by day of the week.
-3. Generates two plots:
-   - Total Offenses vs Part I and Part II Offenses by Day of the Week
-   - Total Offenses vs Adult and Juvenile Arrests by Day of the Week
+## Machine Learning Model
+
+The `gradient-boost-part-I.py` script implements a Gradient Boosting Classifier to predict Part I offenses. It performs the following steps:
+
+1. Loads the processed data.
+2. Prepares features and target variables.
+3. Handles missing values and performs feature scaling.
+4. Addresses class imbalance using Random Undersampling.
+5. Trains the model with early stopping.
+6. Performs cross-validation.
+7. Evaluates the model using various metrics.
+8. Visualizes feature importance and predicted probabilities.
 
 ## Output
 
 The scripts generate the following outputs:
 
-1. `processed_crime_data_2010_2023.gpkg`: A GeoPackage file containing the cleaned and processed crime data with spatial information.
+1. `processed_crime_data_2010_2023.gpkg`: A GeoPackage file containing the cleaned and processed crime data.
 2. `crime_summary_table.html`: An HTML file with a summary table of yearly crime statistics.
 3. Multiple plots displayed during script execution:
    - Yearly time series plots
    - Hourly analysis plots
    - Day of the week analysis plots
+   - Feature importance plot for Part I offenses
+   - Distribution of predicted probabilities for Part I offenses
 
 These outputs can be used for further analysis, visualization, or integration with GIS software.
