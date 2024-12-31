@@ -94,6 +94,12 @@ Ensure your virtual environment is activated, then run the scripts:
    python gradient-boost-part-I.py
    ```
 
+6. Run the decision tree classifier model:
+   ```bash
+   python decision-tree-classifier-part-I.py
+   ```
+
+
 ## Data Processing
 
 The `process-crime-data.py` script performs the following operations:
@@ -134,12 +140,26 @@ The `gradient-boost-part-I.py` script implements a Gradient Boosting Classifier 
 7. Evaluates the model using various metrics.
 8. Visualizes feature importance and predicted probabilities.
 
+The `decision-tree-classifier-part-I.py` script implements a Decision Tree Classifier to predict Part I offenses. It performs the following steps:
+
+1. Loads the processed data
+2. Prepares features and target variables
+3. Splits data into training and testing sets
+4. Trains a decision tree classifier model
+5. Makes predictions on the test set
+6. Evaluates model performance using accuracy metrics
+7. Visualizes the decision tree structure
+8. Generates feature importance plot
+
+The decision tree model provides an interpretable alternative to the gradient boosting classifier, allowing for easy visualization of the decision-making process in classifying Part I offenses.
+
 ## Output
 
 The scripts generate the following outputs:
 
 1. `processed_crime_data_2010_2023.gpkg`: A GeoPackage file containing the cleaned and processed crime data.
 2. `crime_summary_table.html`: An HTML file with a summary table of yearly crime statistics.
+
 3. Multiple plots displayed during script execution:
    - Yearly time series plots
    - Hourly analysis plots
@@ -147,4 +167,44 @@ The scripts generate the following outputs:
    - Feature importance plot for Part I offenses
    - Distribution of predicted probabilities for Part I offenses
 
-These outputs can be used for further analysis, visualization, or integration with GIS software.
+4. Gradient Boosting Model (gradient-boost-part-I.py):
+   - Data Processing Logs:
+     * Data loading confirmation
+     * Feature preparation details
+     * Resampling information
+   
+   - Model Training Progress:
+     * Iterative performance metrics (1-100 iterations with early stopping):
+       - Accuracy
+       - Precision
+       - Recall
+       - F1-score
+       - ROC AUC score
+   
+   - Model Validation:
+     * 5-fold cross-validation scores
+     * Mean cross-validation score
+
+   - Final Model Evaluation:
+     * Accuracy
+     * Precision
+     * Recall
+     * F1-score
+     * ROC AUC score
+
+   - Visualizations:
+     * Feature importance bar plot showing importance of all input features
+     * Histogram showing distribution of predicted probabilities for:
+       - Non-offense cases
+       - Offense cases
+   
+   - Test Set Statistics:
+     * Class balance distribution in test set (normalized counts)
+
+
+5. Decision Tree specific outputs:
+   - Decision tree visualization diagram
+   - Feature importance plot for decision tree model
+   - Model accuracy metrics report
+
+These outputs can be used for further analysis, visualization as needed.
